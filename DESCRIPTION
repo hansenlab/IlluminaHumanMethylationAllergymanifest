@@ -1,0 +1,10 @@
+Package: IlluminaHumanMethylationAllergymanifest
+Version: 0.6.0
+Title: Annotation for Illumina's Asthma and Allergy methylation arrays
+Description: An annotation package for Illumina's Asthama and Allergy methylation arrays.
+Authors@R: c(person(c("Kasper", "Daniel"), "Hansen", role = c("cre", "aut"),
+                    email = "kasperdanielhansen@gmail.com"))
+License: Artistic-2.0
+Depends: R (>= 4.0), minfi (>= 1.38)
+LazyData: yes
+biocViews: AnnotationData, IlluminaChip, Homo_sapiens
