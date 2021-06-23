@@ -2,7 +2,7 @@
 
 **Pre-release package for handling the Illumina Allergy and Asthma array**
 
-Annotation packages
+Annotation packages Github repositories:
 - [IlluminaHumanMethylationAllergymanifest](https://github.com/hansenlab/IlluminaHumanMethylationAllergymanifest)
 - [IlluminaHumanMethylationAllergyanno.ilm10.hg19](https://github.com/hansenlab/IlluminaHumanMethylationAllergyanno.ilm10.hg19)
 
