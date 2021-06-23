@@ -12,6 +12,22 @@ A `tar.gz` package tarball can be downloaded from the "release" tab of these git
 
 These packages are designed to work with minfi version 1.39.1. This package is available from Bioconductor and formally requires Bioconductor devel (version 3.14). It can (for now) be manually installed in R 4.1 with Bioconductor 3.13, however all packages should be up to date.
 
+## What works
+
+Example code
+
+```{r}
+library(minfi)
+meth <- read.metharray(basenames = c("205271030022_R01C01",
+                                     "205271030022_R02C01",
+                                     "205271030022_R03C01"))
+## Works
+preprocessRaw(meth)
+preprocessIllumina(meth)
+preprocessNoob(meth)
+```
+
+
 ## Current issues and limitations
 
 1. Reading in IDAT files results in a warning `In readChar(con, nchars = n) : truncating string with embedded nuls`. This warning is benign; I'm working on fixing it.
