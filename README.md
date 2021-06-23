@@ -7,6 +7,8 @@ Annotation packages
 - [IlluminaHumanMethylationAllergyanno.ilm10.hg19](https://github.com/hansenlab/IlluminaHumanMethylationAllergyanno.ilm10.hg19)
 
 A `tar.gz` package tarball can be downloaded from the "release" tab of these github repos.
+- [IlluminaHumanMethylationAllergymanifest_0.6.0.tar.gz](https://github.com/hansenlab/IlluminaHumanMethylationAllergymanifest/releases/download/0.6/IlluminaHumanMethylationAllergymanifest_0.6.0.tar.gz)
+- [IlluminaHumanMethylationAllergyanno.ilm10.hg19_0.6.0.tar.gz](https://github.com/hansenlab/IlluminaHumanMethylationAllergyanno.ilm10.hg19/releases/download/0.6/IlluminaHumanMethylationAllergyanno.ilm10.hg19_0.6.0.tar.gz)
 
 These packages are designed to work with minfi version 1.39.1. This package is available from Bioconductor and formally requires Bioconductor devel (version 3.14). It can (for now) be manually installed in R 4.1 with Bioconductor 3.13, however all packages should be up to date.
 
