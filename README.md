@@ -7,6 +7,25 @@ Annotation packages Github repositories:
 - [IlluminaHumanMethylationAllergyanno.ilm10.hg19](https://github.com/hansenlab/IlluminaHumanMethylationAllergyanno.ilm10.hg19)
 
 A `tar.gz` package tarball can be downloaded from the "release" tab of these github repos.
+
+- [IlluminaHumanMethylationAllergymanifest_0.8.0.tar.gz](https://github.com/hansenlab/IlluminaHumanMethylationAllergymanifest/releases/download/0.8/IlluminaHumanMethylationAllergymanifest_0.8.0.tar.gz)
+- [IlluminaHumanMethylationAllergyanno.ilm10.hg19_0.8.0.tar.gz](https://github.com/hansenlab/IlluminaHumanMethylationAllergyanno.ilm10.hg19/releases/download/0.8/IlluminaHumanMethylationAllergyanno.ilm10.hg19_0.8.0.tar.gz)
+
+These packages are designed to work with minfi version 1.39.2. This package is available from Bioconductor and formally requires Bioconductor devel (version 3.14). It can (for now) be manually installed in R 4.1 with Bioconductor 3.13, however all packages should be up to date.
+
+# What works
+
+Assuming minfi 1.39.2 is installed, preprocessing with `preprocessRaw(), preprocessIllumina(), preprocessSWAN(), preprocessNoob()` works (in minfi 1.39.1 `preprocessNoob()` does NOT work). 
+
+The release is based on the manifest file `Chicago-S40.manifest.sesame-base.cpg-sorted.csv`. The package has 
+- 38,541 CpGs measured
+- 37,882 CpGs with genomic coordinates (for most purposes, these are the useful CpGs)
+
+The manifest contains 53 CpGs which are measured by multiple probe pairs. A decision needs to be made on how to treat this, and in this release (0.8) these CpGs have been deleted.
+
+
+# Old versions
+
 - [IlluminaHumanMethylationAllergymanifest_0.6.0.tar.gz](https://github.com/hansenlab/IlluminaHumanMethylationAllergymanifest/releases/download/0.6/IlluminaHumanMethylationAllergymanifest_0.6.0.tar.gz)
 - [IlluminaHumanMethylationAllergyanno.ilm10.hg19_0.6.0.tar.gz](https://github.com/hansenlab/IlluminaHumanMethylationAllergyanno.ilm10.hg19/releases/download/0.6/IlluminaHumanMethylationAllergyanno.ilm10.hg19_0.6.0.tar.gz)
 
