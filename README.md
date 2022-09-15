@@ -8,23 +8,27 @@ Annotation packages Github repositories:
 
 A `tar.gz` package tarball can be downloaded from the "release" tab of these github repos.
 
-- [IlluminaHumanMethylationAllergymanifest_0.8.0.tar.gz](https://github.com/hansenlab/IlluminaHumanMethylationAllergymanifest/releases/download/0.8/IlluminaHumanMethylationAllergymanifest_0.8.0.tar.gz)
-- [IlluminaHumanMethylationAllergyanno.ilm10.hg19_0.8.0.tar.gz](https://github.com/hansenlab/IlluminaHumanMethylationAllergyanno.ilm10.hg19/releases/download/0.8/IlluminaHumanMethylationAllergyanno.ilm10.hg19_0.8.0.tar.gz)
+- [IlluminaHumanMethylationAllergymanifest_0.9.0.tar.gz](https://github.com/hansenlab/IlluminaHumanMethylationAllergymanifest/releases/download/0.9/IlluminaHumanMethylationAllergymanifest_0.9.0.tar.gz)
+- [IlluminaHumanMethylationAllergyanno.ilm10.hg19_0.9.0.tar.gz](https://github.com/hansenlab/IlluminaHumanMethylationAllergyanno.ilm10.hg19/releases/download/0.9/IlluminaHumanMethylationAllergyanno.ilm10.hg19_0.9.0.tar.gz)
 
-These packages are designed to work with minfi version 1.39.2. This package is available from Bioconductor and formally requires Bioconductor devel (version 3.14). It can (for now) be manually installed in R 4.1 with Bioconductor 3.13, however all packages should be up to date.
+These packages are designed to work with minfi version 1.43.1. This package is available from Bioconductor and formally requires Bioconductor devel (version 3.16). It can (for now) be manually installed in R 4.1 with Bioconductor 3.15, however all packages should be up to date.
 
 # What works
 
-Assuming minfi 1.39.2 is installed, preprocessing with `preprocessRaw(), preprocessIllumina(), preprocessSWAN(), preprocessNoob()` works (in minfi 1.39.1 `preprocessNoob()` does NOT work). 
+Assuming minfi 1.43.1 is installed, preprocessing with `preprocessRaw(), preprocessIllumina(), preprocessSWAN(), preprocessNoob()` works.
 
-The release is based on the manifest file `Chicago-S40.manifest.sesame-base.cpg-sorted.csv`. The package has 
-- 38,541 CpGs measured
-- 37,882 CpGs with genomic coordinates (for most purposes, these are the useful CpGs)
+The release is based on the manifest file `Asthma_Allergy_v1_2_12x1_20081804_A1.csv`. The package has 
 
-The manifest contains 53 CpGs which are measured by multiple probe pairs. A decision needs to be made on how to treat this, and in this release (0.8) these CpGs have been deleted.
+- 45,899 CpGs measured
+- 45,511 CpGs annotated
+
+We have discarded CpGs which are measured by multiple probe-pairs. There is a total of 182 such CpGs. They are discard at least following normalization, where they shouldn't matter.
 
 
 # Old versions
+
+- [IlluminaHumanMethylationAllergymanifest_0.8.0.tar.gz](https://github.com/hansenlab/IlluminaHumanMethylationAllergymanifest/releases/download/0.8/IlluminaHumanMethylationAllergymanifest_0.8.0.tar.gz)
+- [IlluminaHumanMethylationAllergyanno.ilm10.hg19_0.8.0.tar.gz](https://github.com/hansenlab/IlluminaHumanMethylationAllergyanno.ilm10.hg19/releases/download/0.8/IlluminaHumanMethylationAllergyanno.ilm10.hg19_0.8.0.tar.gz)
 
 - [IlluminaHumanMethylationAllergymanifest_0.6.0.tar.gz](https://github.com/hansenlab/IlluminaHumanMethylationAllergymanifest/releases/download/0.6/IlluminaHumanMethylationAllergymanifest_0.6.0.tar.gz)
 - [IlluminaHumanMethylationAllergyanno.ilm10.hg19_0.6.0.tar.gz](https://github.com/hansenlab/IlluminaHumanMethylationAllergyanno.ilm10.hg19/releases/download/0.6/IlluminaHumanMethylationAllergyanno.ilm10.hg19_0.6.0.tar.gz)

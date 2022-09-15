@@ -1,14 +1,20 @@
 library(minfi)
+
+## Version 1
 # manifestFile <- "../../../IlluminaHumanMethylationAllergy_files/Asthma_Allergy_20048910_A1.sesame.csv"
-manifestFile <- "../../../IlluminaHumanMethylationAllergy_files/Chicago-S40.manifest.sesame-base.cpg-sorted.csv_clean"
+# manifestFile <- "../../../IlluminaHumanMethylationAllergy_files/Chicago-S40.manifest.sesame-base.cpg-sorted.csv_clean"
 ## I removed the line with cg09324845_BC12 because this Address is not in the IDAT files
+
+## Version 1.2
+manifestFile <- "../../../IlluminaHumanMethylationAllergy_files/Asthma_Allergy_v1_2_12x1_20081804_A1.csv"
+
 
 if(!file.exists(manifestFile)) {
     cat("Missing files, quitting\n")
     q(save = "no")
 }
 
-maniTmp <- minfi:::read.manifest.sesame.Allergy(manifestFile)
+maniTmp <- minfi:::read.manifest.Allergy(manifestFile)
 
 ## dupNames <- unique(manifest$Name[duplicated(manifest$Name)])
 ## dups <- manifest[manifest$Name %in% dupNames,]
@@ -22,10 +28,17 @@ manifestList <- maniTmp$manifestList
 
 ## Checking
 library(illuminaio)
-epic <- readIDAT("../../../IlluminaHumanMethylationAllergy_files/205271030022_R01C01_Grn.idat")
+## # Version 1
+## epic <- readIDAT("../../../IlluminaHumanMethylationAllergy_files/205271030022_R01C01_Grn.idat")
+epic <- readIDAT("../../../IlluminaHumanMethylationAllergy_files/URECA_24SamplesToTestv1.2/206602830002_R01C01_Grn.idat")
+
 address.epic <- as.character(epic$MidBlock)
 dropCpGs <- c(anno$IlmnID[!is.na(anno$AddressB) & !anno$AddressB %in% address.epic],
               anno$IlmnID[!is.na(anno$AddressA) & !anno$AddressA %in% address.epic])
+
+dropCpGs <- c(anno$IlmnID[anno$AddressB != "" & !anno$AddressB %in% address.epic],
+              anno$IlmnID[anno$AddressA != "" & !anno$AddressA %in% address.epic])
+
 table(substr(dropCpGs, 1,2))
 
 
@@ -52,13 +65,31 @@ names(anno) <- nam
 rownames(anno) <- anno$Name
 anno <- anno[getManifestInfo(IlluminaHumanMethylationAllergymanifest, type = "locusNames"),]
 
+names_short = sub("_.*", "", rownames(anno))
+tmp = table(names_short)
+dupnames = names(tmp)[tmp > 1]
+dupnames_full = rownames(Locations)[names_short %in% dupnames]
+anno <- anno[! rownames(anno) %in% dupnames_full,]
+
+
 Locations <- anno[, c("CHR", "MAPINFO")]
 names(Locations) <- c("chr", "pos")
+if(all(!grepl("^chr", Locations$chr)))
+    Locations$chr <- paste0("chr", Locations$chr)
+Locations$chr[Locations$chr == "chr0"] <- ""
+is.na(Locations$chr[Locations$strand == ""]) <- TRUE
+is.na(Locations$chr[Locations$pos == ""]) <- TRUE
 Locations$pos <- as.integer(Locations$pos)
 Locations$strand <- ifelse(anno$Strand_FR == "F", "+", "-")
 table(Locations$chr, exclude = NULL)
 rownames(Locations) <- anno$Name
 Locations <- as(Locations, "DataFrame")
+
+## Investigations
+
+
+
+
 
 Manifest <- anno[, c("Name", "AddressA", "AddressB",
                      "ProbeSeqA", "ProbeSeqB", "Type", "NextBase", "Color")]
@@ -87,12 +118,12 @@ Other <- as(Other, "DataFrame")
 ##
 
 annoStr <- c(array = "IlluminaHumanMethylationAllergy",
-             annotation = "ilm10",
+             annotation = "ilm12",
              genomeBuild = "hg19")
 annoNames <- c("Locations", "Manifest", "Other")
 for(nam in annoNames) {
     cat(nam, "\n")
-    save(list = nam, file = file.path("../../../IlluminaHumanMethylationAllergyanno.ilm10.hg19/data", paste(nam, "rda", sep = ".")), compress = "xz")
+    save(list = nam, file = file.path("../../../IlluminaHumanMethylationAllergyanno.ilm12.hg19/data", paste(nam, "rda", sep = ".")), compress = "xz")
 }
 defaults <- c("Locations", "Manifest", "Other")
 pkgName <- sprintf("%sanno.%s.%s", annoStr["array"], annoStr["annotation"],
@@ -103,8 +134,7 @@ annoObj <- IlluminaMethylationAnnotation(objectNames = annoNames, annotation = a
 
 assign(pkgName, annoObj)
 save(list = pkgName,
-     file = file.path("../../../IlluminaHumanMethylationAllergyanno.ilm10.hg19/data/annotation.rda"), compress = "xz")
-
+     file = file.path("../../../IlluminaHumanMethylationAllergyanno.ilm12.hg19/data", "annotation.rda"), compress = "xz")
 sessionInfo()
 q(save = "no")
 
